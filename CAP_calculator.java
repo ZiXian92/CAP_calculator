@@ -1,3 +1,8 @@
+/* CAP_calculator.java
+ * Defines the GUI interface of CAP calculator
+ * To-do: Add in event-handling functions to call background methods
+ * Author: Qua Zi Xian
+ */
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +56,7 @@ public class CAP_calculator extends JFrame{
 		menuBar.add(menu1);
 		setJMenuBar(menuBar);
 
+		//Use the GridBagLayout
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -71,6 +77,7 @@ public class CAP_calculator extends JFrame{
 		row1.add(modPane);
 		row1.add(gradePane);
 		row1.add(addButtonPane);
+		//Specifies which grid cell to place this JPanel into
 		c.gridx = 0;
 		c.gridy = 0;
 		add(row1, c);
@@ -87,6 +94,8 @@ public class CAP_calculator extends JFrame{
 
 		pack();
 
+		//Checks if the thread has ended
+		//Because the outcome of the file input thread is needed here
 		while(!readThread.isAlive()){}
 		user = reader.getUser();
 		if(user==null){
@@ -94,6 +103,7 @@ public class CAP_calculator extends JFrame{
 		}
 	}
 
+	//Main method to start program
 	public static void main(String[] args){
 		CAP_calculator prog = new CAP_calculator();	
 	}

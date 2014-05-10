@@ -1,5 +1,8 @@
 /* CAPCalcMethods.java
  * Backstage processes behind the GUI
+ * To-do: Define other methods required by program.
+ * Only loading and saving methods are defined as of 10 May 2014.
+ * Author: Qua Zi Xian
  */
 
 import java.io.*;
@@ -7,13 +10,18 @@ import java.util.*;
 
 //Defines each module
 class Module{
+	/* Data members */
 	private String code, grade;
 	private int MC;
+
+	/* Constructor */
 	public Module(String code, String grade, int mc){
 		this.code = code;
 		this.grade = grade;
 		MC = mc;
 	}
+
+	/* Accessor methods */
 	public String getCode() { return code; }
 	public String getGrade() { return grade; }
 	public int getMC() { return MC; }
@@ -79,18 +87,17 @@ class User{
 	}
 }
 
+//Defines thread for file input
 class ReadUserThread implements Runnable{
 	User user;
-	boolean complete = true;
-	public boolean isComplete() { return complete;}
 	public void run(){
-		complete = false;
 		user = CAPCalcMethods.readData();
-		complete = true;
 	}
 	public User getUser() { return user; }
 }
 
+//Methods for successful run of program
+//Contains methods that are invoked by events
 public class CAPCalcMethods{
 	//Returns a user or null if input file is empty
 	public static User readData(){
