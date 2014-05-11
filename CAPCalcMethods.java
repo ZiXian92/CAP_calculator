@@ -64,7 +64,11 @@ class User{
 	/* Accessor Methods */
 	public String getName() { return name; }
 	public int getTotalMC() { return totalMC; }
-	public double getCAP() { return totalGradePoint/totalMC; }
+	public double getCAP() throws ArithmeticException{
+		if(totalMC==0)
+			throw new ArithmeticException();
+		return totalGradePoint/totalMC;
+	}
 	public String toString(){
 		String output = name+"\n"+modList.size()+"\n";
 		Iterator<Module> itr = modList.iterator();
@@ -135,17 +139,18 @@ public class CAPCalcMethods{
 	}
 
 	//Saves the user list
-	public static void saveList(LinkedList<User> list){
+	public static boolean saveList(User usr){
+		if(usr==null)
+			return true;
 		File file = new File("usrlist.dat");
 		try{
 			PrintWriter oStream = new PrintWriter(file);
-			Iterator<User> itr = list.iterator();
-			while(itr.hasNext())
-				oStream.println(itr.next());
+			oStream.println(usr);
 			oStream.close();
 		}
 		catch(FileNotFoundException exp){
-
+			return false;
 		}
+		return true;
 	}
 }
