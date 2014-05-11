@@ -1,5 +1,8 @@
 /* NewUserPrompt.java
  * Defines a new window to prompt for new user name
+ * Question regarding threading is in the comments.
+ * Current state: Runs as expected. Awaiting further tests.
+ * Author: Qua Zi Xian
  */
 
 import javax.swing.*;
@@ -15,9 +18,17 @@ class NewUserThread implements Runnable{
 
 	//Runnable method
 	public void run(){
-		NewUserPrompt temp = new NewUserPrompt(returnTarget);
-		while(returnTarget.getUser()==null){}
-		System.exit(0);
+		new NewUserPrompt(returnTarget);
+		while(returnTarget.getUser()==null){
+			/* Why is this a must?
+			 * Without this, when new user prompt closes
+			 * the loop still continues infinitely 
+			 */
+			try{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException exp){}
+		}
 	}
 }
 

@@ -1,0 +1,16 @@
+Author: Qua Zi Xian
+Date created: 11 May 2014
+Date updated: 11 May 2014
+
+Log details
+
+10 May 2014
+Comment: GUI and file I/O methods completed.
+To-do: Implement event handling and input validation.
+
+11 May 2014
+Comment: Event handling and essential functions completed.
+         Added scroll bar for output field.
+To-do: Include input validation for Module, Grade, and MC fields
+       Run further tests to catch for bugs.
+       Clean up the code, plus decoupling of classes.

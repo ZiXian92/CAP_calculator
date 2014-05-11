@@ -1,6 +1,9 @@
 /* CAP_calculator.java
  * Defines the GUI interface of CAP calculator
- * To-do: Add in event-handling functions to call background methods
+ * To-do: Add scroll pane to outputArea
+ * Decoupling the classes as much as possible and simplify/neaten
+ * the code 
+ * Current status: Runs as expected, awaiting further tests 
  * Author: Qua Zi Xian
  */
 
@@ -51,6 +54,7 @@ public class CAP_calculator extends JFrame implements ActionListener{
 	JPanel row3 = new JPanel();
 	JLabel output = new JLabel("Output: ", JLabel.RIGHT);
 	JTextArea outputArea = new JTextArea(10, 40);
+	JScrollPane scroll = new JScrollPane(outputArea);
 
 	//Constructor
 	public CAP_calculator(){
@@ -111,7 +115,7 @@ public class CAP_calculator extends JFrame implements ActionListener{
 		row3.setLayout(flo1);
 		row3.add(output);
 		outputArea.setEnabled(false);
-		row3.add(outputArea);
+		row3.add(scroll);
 		c.gridx = 0;
 		c.gridy = 2;
 		add(row3, c);
@@ -120,18 +124,26 @@ public class CAP_calculator extends JFrame implements ActionListener{
 
 		//Checks if the thread has ended
 		//Because the outcome of the file input thread is needed here
-		while(readThread.isAlive()){}
+		while(readThread.isAlive()){
+			try{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException exp){}
+		}
 		user = reader.getUser();
 		if(user==null){
 			outputArea.append("No user detected\n");
-			/*readThread = new Thread(new NewUserThread(this));
+			readThread = new Thread(new NewUserThread(this));
 			setInputs(false);
 			readThread.start();
-			while(readThread.isAlive()){}*/
-			new NewUserPrompt(this);
+			while(readThread.isAlive()){
+				/*try{
+					Thread.sleep(1000);
+				}
+				catch(InterruptedException exp){}*/
+			}
 		}
-		else
-			outputArea.append("Load successful\n");
+		else	outputArea.append("Load successful\n");
 		outputArea.append("Welcome, "+user.getName()+"\n");
 		setInputs(true);
 	}
@@ -186,7 +198,7 @@ public class CAP_calculator extends JFrame implements ActionListener{
 	}
 
 	//Creates a new user based on input user name
-	void addUser(String username) { user = new User(username); }
+	public void addUser(String username) { user = new User(username); }
 
 	User getUser() { return user; }
 	
