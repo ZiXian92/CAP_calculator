@@ -1,6 +1,14 @@
 ********************************************************************************
 			CAP Calculator v1.0 User Guide
+				Author: Qua Zi Xian
 ********************************************************************************
+
+*Disclaimer: All warnings are listed below, especially for inputs!
+	     Please enter the CORRECT input as indicated and requested by
+	     each field.
+
+* This program requires Java Runtime Environment(JRE) to be installed in
+  order to run.
 
 * Always make sure usrlist.dat is in the same directory as the program or
   the program will crash.
@@ -15,7 +23,9 @@
 * It is recommended to save your progress each time you enter new data
   correctly.
 
-To launch the program, double-click on the .jar file.
+To launch the program, open Command Prompt(for Windows users) or Terminal(for
+Linux users). Change the directory to the directory where the .class files
+are located. Run "java CAP_calculator" to execute the program.
 
 On 1st launch, usrlist.dat is empty. Thus a prompt will appear for creating
 a new user.
